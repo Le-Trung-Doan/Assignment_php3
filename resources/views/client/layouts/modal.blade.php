@@ -13,7 +13,7 @@
             @if(Session::has('msg'))
                 <span class="auth-form__input-error">{{Session::get('msg')}}</span>
             @endif
-            <form action="{{route('login')}}" method="post">
+            <form action="{{route('login.post')}}" method="post">
                 @csrf
                 <div class="auth-form__group">
                     <input type="text" class="auth-form__input" placeholder="Nhập email" name="email">

@@ -18,8 +18,8 @@ Route::group(["namespace" => "App\Http\Controllers"], function () {
     Route::get('/product', "HomeController@product")->name('home.product');
 
 
-
-    Route::post('login', "AuthController@postLogin")->name('login');
+    Route::get('login', "AuthController@postLogin")->name('login');
+    Route::post('login', "AuthController@postLogin")->name('login.post');
     Route::any('logout', "AuthController@logout")->name('logout');
 
 });
