@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\AddProductRequest;
 use App\Http\Requests\ProductRequest;
 use App\Models\Brand;
 use App\Models\Category;
@@ -110,9 +109,5 @@ class ProductController extends Controller
         $model->delete();
 
         return redirect(route('product.index'));
-    }
-
-    public function detail() {
-
     }
 }
