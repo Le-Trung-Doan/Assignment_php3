@@ -1,10 +1,10 @@
-<div class="modal" @if(Session::has('msg')) style="visibility: visible" @endif>
+<div class="modal" @if(Session::has('msg')||$errors->all()) style="visibility: visible" @endif>
     <div class="modal__overlay">
 
     </div>
     <div class="modal__body">
         <!-- form login -->
-        <div class="auth-form auth-form__signin-form" @if(Session::has('msg')) style="display: block" @endif>
+        <div class="auth-form auth-form__signin-form" @if(Session::has('msg')||$errors->all()) style="display: block" @endif>
             <div class="auth-form__header">
                 <h3 class="auth-form__heading">
                     Đăng nhập
@@ -17,10 +17,16 @@
                 @csrf
                 <div class="auth-form__group">
                     <input type="text" class="auth-form__input" placeholder="Nhập email" name="email">
-                    <!-- <span class="auth-form__input-error">Email của bạn đã tồn tại</span> -->
+                    @error('email')
+                    <span class="auth-form__input-error">{{$message}}</span>
+                    @enderror
+                <!-- <span class="auth-form__input-error"></span> -->
                 </div>
                 <div class="auth-form__group">
                     <input type="password" class="auth-form__input" placeholder="Nhập password" name="password">
+                    @error('password')
+                    <span class="auth-form__input-error">{{$message}}</span>
+                    @enderror
                     <!-- <span class="auth-form__input-error">Email của bạn đã tồn tại</span> -->
                 </div>
                 <div class="auth-form__group auth-form__group-btn">

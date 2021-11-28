@@ -20,9 +20,6 @@ Route::group(["namespace" => "App\Http\Controllers"], function () {
 
 
     Route::post('login', "AuthController@postLogin")->name('login');
-    Route::any('logout', function () {
-        Auth::logout();
-        return redirect(route('home.index'));
-    })->name('logout');
+    Route::any('logout', "AuthController@logout")->name('logout');
 
 });
