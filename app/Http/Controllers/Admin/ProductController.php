@@ -51,7 +51,8 @@ class ProductController extends Controller
         $searchData['order_by'] = $rq_order_by;
         $searchData['column_names'] = $rq_column_names;
         $products->load('category', 'brand');
-        return view('admin.products.index', compact('products', 'categories', 'column_names', 'order_by', 'searchData'));
+        // return view('admin.products.index', compact('products', 'categories', 'column_names', 'order_by', 'searchData'));
+        return response()->json($products);
     }
 
     public function addForm() {
