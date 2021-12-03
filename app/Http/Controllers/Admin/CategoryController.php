@@ -11,13 +11,9 @@ use Illuminate\Http\Request;
 class CategoryController extends Controller
 {
     public function index(Request  $request) {
-        $categories = Category::where('name', 'like', "%$request->keyword%")->get();
-        $keyword = $request->keyword;
-        return view('admin.categories.index', compact('categories', 'keyword'));
-    }
+        $categories = Category::orderByDesc('id')->get();
 
-    public function addForm() {
-        return view('admin.categories.addCategory');
+        return response()->json($categories);
     }
 
     public function saveAdd(CategoryRequest $request) {
@@ -27,15 +23,14 @@ class CategoryController extends Controller
         }
         $model->fill($request->all());
         $model->save();
-        return (redirect(route('category.index')));
     }
 
-    public function editForm($id) {
+    public function edit($id) {
         $model = Category::find($id);
         if(!$model){
             return back();
         }
-        return view('admin.categories.editCategory', compact('model'));
+        return response()->json($model);
     }
 
     public function saveEdit(CategoryRequest $request,$id) {
@@ -45,13 +40,11 @@ class CategoryController extends Controller
         }
         $model->fill($request->all());
         $model->save();
-        return redirect(route('category.index'));
     }
 
     public function remove($id) {
         $model = Category::find($id);
         Product::where("cate_id", $id)->get()->delete();
         $model->delete();
-        return redirect(route('category.index'));
     }
 }

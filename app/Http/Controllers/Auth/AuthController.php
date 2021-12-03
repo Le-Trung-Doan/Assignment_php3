@@ -14,9 +14,10 @@ class AuthController extends Controller
         $password = $request->password;
 
         if(Auth::attempt(['email' => $email, 'password' => $password], $request->remember)){
-            return redirect()->back();
+            return response()->json(Auth::user());
+
         }else {
-            return redirect()->back()->with('msg', 'Tài khoản/mật khẩu không chính xác');
+            return response()->json('error');
         }
     }
 
@@ -24,6 +25,6 @@ class AuthController extends Controller
 
     public function logout() {
         Auth::logout();
-        return redirect(route('home.index'));
+        dd(Auth::user());
     }
 }
